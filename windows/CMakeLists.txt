@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(flutter_note LANGUAGES CXX)
+project(flutter_notes LANGUAGES CXX)
 
-set(BINARY_NAME "flutter_note")
+set(BINARY_NAME "flutter_notes")
 
 cmake_policy(SET CMP0063 NEW)
 
