@@ -40,9 +40,12 @@ class Script {
     await shell.run(pullCommand(branch: branch));
   }
 
+  static Future<void> pubGetProject() async {
+    await shell.run('flutter pub get');
+  }
+
   static Future<void> cleanProject() async {
     await shell.run('flutter clean');
-    await shell.run('flutter pub get');
   }
 
   static Future<void> buildProject(Type type) async {

@@ -17,28 +17,30 @@ import 'package:cli/ci_script.dart';
 
 void main(List<String> args) async {
   try {
+    // Pub Get
+    await Script.pubGetProject();
+    // 参数解析
     var parser = ArgParser()
       ..addOption('branch', defaultsTo: 'main')
       ..addOption('build', defaultsTo: 'full');
     ArgResults argResults = parser.parse(args);
-
     // 获取打包参数
     final branch = argResults['branch'];
     final build = argResults['build'];
     final type = int.tryParse(build);
-
     logger.i(''
         '打包：${type == null ? build : Type.values[type]}'
         '\n'
         '分支：$branch');
-
     await Config.init();
     // 拉取分支最新代码
     await Script.pullProject(branch);
     // 记录打包开始时间
     final begin = DateTime.now();
     // clean
-    await Script.cleanProject();
+    // await Script.cleanProject();
+    // Pub Get
+    await Script.pubGetProject();
     // 根据参数打包
     if (type != null) {
       await Script.buildProject(Type.values[type]);
