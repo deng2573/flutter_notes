@@ -60,6 +60,6 @@ void main(List<String> args) async {
     logger.i('总耗时：$time 秒');
     exit(0);
   } catch (e) {
-    logger.i(e.toString());
+    logger.e(e.toString());
   }
 }
