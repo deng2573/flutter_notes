@@ -23,6 +23,30 @@
 			"group": "build",
 			"problemMatcher": [],
 			"label": "flutter: flutter build ipa"
-		}
+		},
+		{
+			"type": "flutter",
+			"command": "flutter",
+			"args": [
+				"pub",
+				"run",
+				"flutter_launcher_icons:main"
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"label": "flutter: flutter icon create"
+		},
+		{
+			"type": "flutter",
+			"command": "flutter",
+			"args": [
+				"pub",
+				"run",
+				"flutter_native_splash:create"
+			],
+			"group": "build",
+			"problemMatcher": [],
+			"label": "flutter: flutter splash create"
+		},
 	]
 }
