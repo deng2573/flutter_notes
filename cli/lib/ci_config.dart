@@ -22,6 +22,6 @@ class Config {
     final yamlVersion = yamlDoc['version'].toString();
     _version = yamlVersion.split('+').first;
     _buildNumber = yamlVersion.split('+').last;
-    _appName = '${yamlName}_$version.${buildNumber}_develop';
+    _appName = '${yamlName}_v$version.${buildNumber}_develop';
   }
 }
