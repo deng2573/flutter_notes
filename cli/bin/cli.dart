@@ -13,7 +13,7 @@ import 'package:cli/ci_script.dart';
 /// flutter pub run cli --build full                          全平台全渠道打包
 /// flutter pub run cli --build android                       Android全渠道打包
 /// flutter pub run cli --build ios                           iOS全渠道打包
-/// flutter pub run cli --branch 1.0.1 --build 4    指定分支，指定平台及渠道打包，是否签名
+/// flutter pub run cli --branch develop --build 4    指定分支，指定平台及渠道打包，是否签名
 
 void main(List<String> args) async {
   try {
