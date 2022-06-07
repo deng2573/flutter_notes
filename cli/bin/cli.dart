@@ -21,7 +21,7 @@ void main(List<String> args) async {
     await Script.pubGetProject();
     // 参数解析
     var parser = ArgParser()
-      ..addOption('branch', defaultsTo: 'main')
+      ..addOption('branch', defaultsTo: 'develop')
       ..addOption('build', defaultsTo: 'full');
     ArgResults argResults = parser.parse(args);
     // 获取打包参数

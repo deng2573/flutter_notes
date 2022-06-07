@@ -5,11 +5,11 @@ import 'package:cli/ci_type.dart';
 import 'package:cli/ci_config.dart';
 import 'package:cli/ci_logger.dart';
 
-String pullCommand({String branch = 'main'}) {
+String pullCommand({String branch = 'develop'}) {
   return 'git -c color.branch=false -c color.diff=false -c color.status=false -c diff.mnemonicprefix=false -c core.quotepath=false -c credential.helper=sourcetree pull --no-commit origin $branch';
 }
 
-String checkoutCommand({String branch = 'main', isExist}) {
+String checkoutCommand({String branch = 'develop', isExist}) {
   return 'git --no-optional-locks -c color.branch=false -c color.diff=false -c color.status=false -c diff.mnemonicprefix=false -c core.quotepath=false -c credential.helper=sourcetree checkout ${isExist ? branch : '-b $branch --track origin/$branch'}';
 }
 
