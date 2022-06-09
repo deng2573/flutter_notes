@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes/core/widgets/diglog_input.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -11,14 +12,21 @@ class _HomePageState extends State<HomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
+    InputDialog.show(
+      context: context,
+      hintText: '友善是交流的起点',
+      minLines: 2,
+      maxLines: 5,
+      maxLength: 300,
+      onChange: (String name) {},
+      onSubmit: (String name) {},
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         // Here we take the value from the HomePage object that was created by
         // the App.build method, and use it to set our appbar title.
