@@ -15,8 +15,7 @@ class _HomePageState extends State<HomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
-    // Loading.show(msg: '加载...');
-    // Toast.show(msg: '近日，一笔7亿元的项目贷款');
+    Loading.show();
     // x.Dialog.alter();
     // KeyboardInput.show(
     //   context: context,

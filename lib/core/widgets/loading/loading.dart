@@ -35,10 +35,16 @@ class LoadingWiget extends StatelessWidget {
             color: Colors.black.withOpacity(0.9),
             borderRadius: BorderRadius.circular(5),
           ),
-          padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 10),
-          child: const Ball3OpacityLoading(),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            children: [
+              const SizedBox(height: 18),
+              const Ball3OpacityLoading(),
+              if (msg.isNotEmpty) LoadingText(msg: msg),
+              SizedBox(height: msg.isNotEmpty ? 10 : 18),
+            ],
+          ),
         ),
-        if (msg.isNotEmpty) LoadingText(msg: msg),
       ],
     );
   }
@@ -55,12 +61,12 @@ class LoadingText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.only(top: 12),
       child: Text(
         msg,
-        style: TextStyle(
-          fontSize: 15,
-          color: Colors.black.withOpacity(0.9),
+        style: const TextStyle(
+          fontSize: 14,
+          color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -111,15 +117,15 @@ class _Ball3OpacityLoadingState extends State<Ball3OpacityLoading>
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(3, (index) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 4),
+          padding: const EdgeInsets.symmetric(horizontal: 3),
           child: AnimatedBuilder(
             animation: _controller,
             builder: (context, child) {
               return Opacity(
                 opacity: _animations[index].value,
                 child: const SizedBox(
-                  width: 6,
-                  height: 6,
+                  width: 8,
+                  height: 8,
                   child: DecoratedBox(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
