@@ -16,6 +16,8 @@ dependencies:
   flutter_keyboard_visibility: ^5.2.0
   #设备信息
   device_info_plus: ^3.2.4
+  #Loading Toast Dialog
+  flutter_smart_dialog: ^4.5.2
 
 dev_dependencies:
   flutter_test:

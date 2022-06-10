@@ -7,8 +7,8 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
-class InputDialog extends StatefulWidget {
-  const InputDialog({
+class KeyboardInput extends StatefulWidget {
+  const KeyboardInput({
     Key? key,
     this.controller,
     this.keyboardType,
@@ -35,7 +35,7 @@ class InputDialog extends StatefulWidget {
   final void Function(String)? onChange;
 
   @override
-  InputDialogState createState() => InputDialogState();
+  KeyboardInputState createState() => KeyboardInputState();
 
   static OverlayEntry? _overlayEntry;
 
@@ -54,7 +54,7 @@ class InputDialog extends StatefulWidget {
   }) async {
     _overlayEntry = OverlayEntry(
       builder: ((context) {
-        return InputDialog(
+        return KeyboardInput(
           controller: controller,
           inputFormatters: inputFormatters,
           keyboardType: keyboardType,
@@ -76,7 +76,7 @@ class InputDialog extends StatefulWidget {
   }
 }
 
-class InputDialogState extends State<InputDialog> {
+class KeyboardInputState extends State<KeyboardInput> {
   final FocusNode _focusNode = FocusNode();
   late TextEditingController _controller;
   StreamSubscription? _keyboardSubscribe;
@@ -250,7 +250,7 @@ class InputDialogState extends State<InputDialog> {
   void _close() {
     if (mounted) {
       _focusNode.unfocus();
-      InputDialog.dismiss();
+      KeyboardInput.dismiss();
     }
   }
 

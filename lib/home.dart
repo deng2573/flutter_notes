@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:notes/core/widgets/diglog_input.dart';
+import 'package:notes/core/widgets/input/input_keyboard.dart';
+import 'package:notes/core/widgets/loading/loading.dart';
+import 'package:notes/core/widgets/toast/toast.dart';
+import 'core/widgets/diglog/diglog.dart' as x;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -12,15 +15,18 @@ class _HomePageState extends State<HomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
-    InputDialog.show(
-      context: context,
-      hintText: '友善是交流的起点',
-      minLines: 2,
-      maxLines: 5,
-      maxLength: 300,
-      onChange: (String name) {},
-      onSubmit: (String name) {},
-    );
+    // Loading.show(msg: '加载...');
+    // Toast.show(msg: '近日，一笔7亿元的项目贷款');
+    // x.Dialog.alter();
+    // KeyboardInput.show(
+    //   context: context,
+    //   hintText: '友善是交流的起点',
+    //   minLines: 2,
+    //   maxLines: 5,
+    //   maxLength: 300,
+    //   onChange: (String name) {},
+    //   onSubmit: (String name) {},
+    // );
   }
 
   @override
