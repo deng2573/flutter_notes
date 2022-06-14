@@ -7,36 +7,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
-class KeyboardInput extends StatefulWidget {
-  const KeyboardInput({
-    Key? key,
-    this.controller,
-    this.keyboardType,
-    this.inputFormatters,
-    this.hintText = '请输入',
-    this.submitText = '确定',
-    this.maxLines,
-    this.maxLength = 20,
-    this.minLines = 1,
-    this.onSubmit,
-    this.onChange,
-  }) : super(key: key);
-
-  final TextEditingController? controller;
-  final TextInputType? keyboardType;
-  final List<TextInputFormatter>? inputFormatters;
-  final String? hintText;
-  final String? submitText;
-  final int? maxLines;
-  final int? minLines;
-  final int? maxLength;
-
-  final void Function(String)? onSubmit;
-  final void Function(String)? onChange;
-
-  @override
-  KeyboardInputState createState() => KeyboardInputState();
-
+class Input {
   static OverlayEntry? _overlayEntry;
 
   static Future<void> show({
@@ -72,8 +43,42 @@ class KeyboardInput extends StatefulWidget {
   }
 
   static Future<void> dismiss() async {
-    _overlayEntry?.remove();
+    if (_overlayEntry != null) {
+      _overlayEntry?.remove();
+      _overlayEntry = null;
+    }
   }
+}
+
+class KeyboardInput extends StatefulWidget {
+  const KeyboardInput({
+    Key? key,
+    this.controller,
+    this.keyboardType,
+    this.inputFormatters,
+    this.hintText = '请输入',
+    this.submitText = '确定',
+    this.maxLines,
+    this.maxLength = 20,
+    this.minLines = 1,
+    this.onSubmit,
+    this.onChange,
+  }) : super(key: key);
+
+  final TextEditingController? controller;
+  final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
+  final String? hintText;
+  final String? submitText;
+  final int? maxLines;
+  final int? minLines;
+  final int? maxLength;
+
+  final void Function(String)? onSubmit;
+  final void Function(String)? onChange;
+
+  @override
+  KeyboardInputState createState() => KeyboardInputState();
 }
 
 class KeyboardInputState extends State<KeyboardInput> {
@@ -250,7 +255,7 @@ class KeyboardInputState extends State<KeyboardInput> {
   void _close() {
     if (mounted) {
       _focusNode.unfocus();
-      KeyboardInput.dismiss();
+      Input.dismiss();
     }
   }
 
