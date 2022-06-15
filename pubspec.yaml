@@ -10,14 +10,20 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  #网络
+  # 网络
   dio: ^4.0.6
-  #键盘监听
+  # 加密
+  encrypt: ^5.0.1
+  # 键盘监听
   flutter_keyboard_visibility: ^5.2.0
-  #设备信息
+  # 设备信息
   device_info_plus: ^3.2.4
-  #Loading Toast Dialog
+  # Loading Toast Dialog
   flutter_smart_dialog: ^4.5.2
+  # 日志
+  logger: ^1.1.0
+  # 文件目录
+  path_provider: ^2.0.11
 
 dev_dependencies:
   flutter_test:
