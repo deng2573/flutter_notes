@@ -42,9 +42,10 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/icon/
     - assets/json/
-
+    - assets/images/icon/
+    - assets/images/launch/
+   
 flutter_icons:
   ios: true
   android: true

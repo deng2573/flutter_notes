@@ -1,7 +1,7 @@
-import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
+import 'dart:async';
 
+import 'package:notes/core/utils/util_log.dart';
 import 'package:notes/core/http/http_manager.dart';
 
 const _env = String.fromEnvironment(
@@ -99,57 +99,22 @@ class AppConfig {
 
   static Future<void> init() async {
     try {
-      _config = await _pullConfig('v1.1.2');
+      _config = await _pullConfig('v1.0.0');
     } catch (e) {
-      print('pull config error: $e');
+      // Log.e('pull config error');
     }
   }
 
   static Future<AppConfig?> _pullConfig(String version) async {
-    final file = '$version-${config.channel}.json';
-    final uri = Uri.https(
-      'res.x-zts.com',
-      'appconfig/$_env/$file.json',
-    );
-    final response = await Http.download('$uri');
+    final file = '$version-${config.channel}';
+    final url =
+        'https://x-zts.oss-cn-hangzhou.aliyuncs.com/appconfig/$_env/$file.json';
+    final response = await Http.download(url);
     if (response.statusCode == HttpStatus.ok) {
-      final responseBody = utf8.decode(response.data);
-      final data = json.decode(responseBody) as Map<String, dynamic>;
+      final data = response.data as Map<String, dynamic>;
       final config = AppConfig.fromJson(data);
       return config;
     }
     return null;
   }
-
-  // static Future<void> loadConfig({Completer<void>? completer}) async {
-  //   completer ??= Completer<void>();
-  //   try {
-  //     final connectivityResult = await Connectivity().checkConnectivity();
-  //     if (connectivityResult == ConnectivityResult.none) {
-  //       lieDialog(
-  //         title: '网络不可用',
-  //         middleText: '网络不可用，请检查您的网络，并重试。',
-  //         textConfirm: '重试',
-  //         onConfirm: () async {
-  //           Get.back();
-  //           loadConfig(completer: completer);
-  //         },
-  //       );
-  //       return completer.future;
-  //     }
-  //     await AppConfig.init(Application.packageInfo);
-  //     completer.complete();
-  //   } catch (e) {
-  //     await lieDialog(
-  //       title: '网络错误',
-  //       middleText: '网络错误，请检查您的网络，并重试。',
-  //       textConfirm: '重试',
-  //       onConfirm: () async {
-  //         Get.back();
-  //         loadConfig(completer: completer);
-  //       },
-  //     );
-  //   }
-  //   return completer.future;
-  // }
 }

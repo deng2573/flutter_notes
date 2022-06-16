@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:notes/application.dart';
+import 'package:notes/routes/paths.dart';
 import 'package:notes/core/utils/util_hud.dart';
-import 'package:notes/pages/home.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class _SplashState extends State<Splash> {
       HUD.loading();
       await Application.init();
       await Future.delayed(const Duration(seconds: 2));
-      Get.offAll(const HomePage());
+      Get.offAllNamed(Paths.home);
       HUD.dismiss();
     });
   }
@@ -31,6 +31,10 @@ class _SplashState extends State<Splash> {
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
+        image: DecorationImage(
+          image: AssetImage('assets/images/launch/launch_light.png'),
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:notes/core/http/http_result.dart';
 import 'package:notes/core/http/http_interceptor.dart';
 
 import 'package:notes/core/utils/util_hud.dart';
+import 'package:notes/core/utils/util_log.dart';
 
 enum HttpMethod { get, post, delete, put }
 
@@ -17,13 +18,13 @@ class Http {
   Http._() {
     _client.options = BaseOptions(
       baseUrl: 'https://api.github.com',
-      connectTimeout: 5000,
-      receiveTimeout: 3000,
+      connectTimeout: 50000,
+      receiveTimeout: 50000,
     );
     _client.interceptors.add(HttpInterceptor());
   }
 
-  Future<HttpResult?> request(
+  Future<HttpResult> request(
     String url, {
     bool loading = false,
     bool toast = false,
@@ -38,17 +39,18 @@ class Http {
       final result = HttpResult.fromJson(response.data);
       return result;
     } on DioError catch (e, _) {
-      if (toast) {
-        final error = HttpException.getException(e);
-        if (error is BusinessException) {
-          HUD.toast(msg: error.msg);
-        }
+      final error = HttpException.getException(e);
+      if (error is BusinessException) {
+        if (toast) HUD.toast(msg: error.msg);
+        Log.e(error.msg);
       }
-      return null;
+      throw Exception('数据请求异常');
+    } on FormatException catch (_) {
+      throw const FormatException('数据解析异常');
     }
   }
 
-  static Future<HttpResult?> get(
+  static Future<HttpResult> get(
     String url, {
     bool loading = false,
     bool toast = false,

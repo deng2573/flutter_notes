@@ -136,7 +136,6 @@ class _SimplePageState extends State<SimplePage> {
             );
             break;
           case 5:
-            Log.v('verbose1');
             Log.i('verbose1');
             Log.d('verbose1');
             Log.w('verbose1');

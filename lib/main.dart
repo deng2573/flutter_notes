@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:notes/splash.dart';
-
+import 'package:notes/routes/pages.dart';
 import 'package:notes/theme.dart';
 import 'package:notes/core/utils/util_hud.dart';
 
@@ -19,7 +18,8 @@ class App extends StatelessWidget {
       builder: HUD.init(),
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      home: const Splash(),
+      getPages: Pages.routes,
+      initialRoute: Pages.root,
     );
   }
 }
