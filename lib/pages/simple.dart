@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:notes/core/utils/util_hud.dart';
 import 'package:notes/core/utils/util_input.dart';
+import 'package:notes/core/utils/util_log.dart';
 
 class SimplePage extends StatefulWidget {
   final String simple;
@@ -133,6 +134,15 @@ class _SimplePageState extends State<SimplePage> {
               context: context,
               hintText: '请输入',
             );
+            break;
+          case 5:
+            Log.v('verbose1');
+            Log.i('verbose1');
+            Log.d('verbose1');
+            Log.w('verbose1');
+            Log.e('error1');
+            Log.e('error2');
+            Log.e('error3');
             break;
         }
     }

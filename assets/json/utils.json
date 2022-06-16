@@ -18,5 +18,9 @@
   {
     "id": 4,
     "title": "Input"
+  },
+  {
+    "id": 5,
+    "title": "Log"
   }
 ]

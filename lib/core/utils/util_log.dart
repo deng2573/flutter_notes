@@ -1,63 +1,63 @@
 import 'dart:io';
-import 'dart:convert';
+import 'package:flutter/foundation.dart';
 
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 
-import '../net/network_exceptions.dart';
+class Log {
+  static late final File file;
 
-late final Logger logger;
+  static late final Logger _logger;
 
-File? get loggerFile => _loggerFile;
-File? _loggerFile;
-
-Future<void> initLogger() async {
-  String? _loggerPath;
-  if (Platform.isIOS) {
-    final dir = await getApplicationDocumentsDirectory();
-    _loggerPath = dir.path;
-  } else if (Platform.isAndroid) {
-    final dir = await getExternalStorageDirectory();
-    _loggerPath = dir?.path;
+  static Future<void> init() async {
+    if (kDebugMode || kIsWeb) {
+      _logger = Logger(
+        printer: PrettyPrinter(),
+      );
+    } else {
+      Directory? logDirectory;
+      if (Platform.isAndroid) {
+        logDirectory = await getExternalStorageDirectory();
+      }
+      logDirectory ??= await getApplicationDocumentsDirectory();
+      file = File('${logDirectory.path}/notes.log');
+      _logger = Logger(
+        printer: PrettyPrinter(),
+        output: FileOutput(file: file),
+        level: Level.error,
+        filter: ProductionFilter(),
+      );
+    }
   }
 
-  const _appEnv = String.fromEnvironment('APP_ENV', defaultValue: 'local');
-  if ((_appEnv == 'prod' || _appEnv == 'stage') && _loggerPath != null) {
-    _loggerFile = File('$_loggerPath/lie.log');
-    if (!_loggerFile!.existsSync()) {
-      _loggerFile?.createSync();
-    }
-    logger = Logger(
-      printer: PrefixPrinter(PrettyPrinter(colors: false)),
-      output: FileOutput(file: _loggerFile!, overrideExisting: true),
-      level: Level.error,
-      filter: ProductionFilter(),
-    );
-  } else {
-    logger = Logger(
-      printer: PrettyPrinter(),
-    );
+  static void i(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+    _logger.i(message, error, stackTrace);
+  }
+
+  static void d(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+    _logger.d(message, error, stackTrace);
+  }
+
+  static void w(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+    _logger.w(message, error, stackTrace);
+  }
+
+  static void e(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+    _logger.e(message, error, stackTrace);
   }
 }
 
 class FileOutput extends LogOutput {
   final File file;
-  final bool overrideExisting;
-  final Encoding encoding;
   IOSink? _sink;
 
   FileOutput({
     required this.file,
-    this.overrideExisting = false,
-    this.encoding = utf8,
   });
 
   @override
   void init() {
-    _sink = file.openWrite(
-      mode: overrideExisting ? FileMode.writeOnly : FileMode.writeOnlyAppend,
-      encoding: encoding,
-    );
+    _sink = file.openWrite(mode: FileMode.append);
   }
 
   @override
@@ -70,24 +70,4 @@ class FileOutput extends LogOutput {
     await _sink?.flush();
     await _sink?.close();
   }
-}
-
-Future<bool> liePrintError(
-  Object e,
-  StackTrace stack, {
-  bool showError = true,
-  bool dismiss = true,
-}) async {
-  final error = NetworkExceptions.getDioException(e);
-  if (showError) {
-    if (error is BusinessError) {
-      EasyLoading.showError(error.message);
-      return true;
-    }
-  }
-  logger.e(e.toString(), e, stack);
-  if (dismiss) {
-    EasyLoading.dismiss();
-  }
-  return false;
 }

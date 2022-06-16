@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:notes/splash.dart';
 
 import 'package:notes/theme.dart';
-import 'package:notes/pages/home.dart';
 import 'package:notes/core/utils/util_hud.dart';
 
 void main() => runApp(const App());
@@ -11,14 +12,14 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Notes',
       useInheritedMediaQuery: true,
       navigatorObservers: [HUD.observer],
       builder: HUD.init(),
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      home: const HomePage(),
+      home: const Splash(),
     );
   }
 }
