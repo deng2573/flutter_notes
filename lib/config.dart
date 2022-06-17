@@ -101,7 +101,7 @@ class AppConfig {
     try {
       _config = await _pullConfig('v1.0.0');
     } catch (e) {
-      // Log.e('pull config error');
+      Log.e('pull config error');
     }
   }
 

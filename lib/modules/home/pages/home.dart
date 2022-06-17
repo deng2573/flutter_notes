@@ -1,46 +1,28 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-import 'package:notes/pages/simple.dart';
+import 'package:get/get.dart';
 
-class HomePage extends StatefulWidget {
+import 'package:notes/modules/home/models/home_model.dart';
+import 'package:notes/modules/home/controllers/home_controller.dart';
+
+class HomePage extends GetView<HomeController> {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  List<HomeModel> _list = <HomeModel>[];
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await _loadList();
-    });
-  }
-
-  Future<void> _loadList() async {
-    final data = await rootBundle.loadString('assets/json/home.json');
-    final result = json.decode(data) as List<dynamic>;
-    _list = result.map((e) => HomeModel.fromJson(e)).toList();
-    setState(() {});
-  }
-
-  @override
   Widget build(BuildContext context) {
+    Get.put(HomeController());
     return Scaffold(
       appBar: AppBar(),
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          final item = _list[index];
-          return _buildHomeItem(item);
-        },
-        itemCount: _list.length,
-      ),
+      body: Obx(() {
+        final items = controller.items;
+        return ListView.builder(
+          itemBuilder: (context, index) {
+            final item = items[index];
+            return _buildHomeItem(item);
+          },
+          itemCount: items.length,
+        );
+      }),
     );
   }
 
@@ -48,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     return InkWell(
       enableFeedback: false,
       onTap: () {
-        _openSimplePage(item);
+        controller.openSimplePage(item);
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
@@ -115,35 +97,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-  }
-
-  void _openSimplePage(HomeModel model) async {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => SimplePage(
-          simple: (model.title ?? '').toLowerCase(),
-        ),
-      ),
-    );
-  }
-}
-
-class HomeModel {
-  int id;
-  String? title;
-  String? desc;
-
-  HomeModel({
-    required this.id,
-    this.title,
-    this.desc,
-  });
-
-  factory HomeModel.fromJson(Map<String, dynamic> json) {
-    return HomeModel(
-        id: json['id'] as int,
-        title: json['title'] as String?,
-        desc: json['desc'] as String?);
   }
 }
