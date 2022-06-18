@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 import 'package:notes/modules/simple/models/simple_model.dart';
+import 'package:notes/routes/paths.dart';
 
 class SimpleController extends GetxController {
   late final int id;
@@ -29,6 +30,7 @@ class SimpleController extends GetxController {
   }
 
   void openSimplePage(SimpleModel item) {
+    Get.toNamed(Paths.demo);
     //  switch (widget.simple) {
     //   case 'utils':
     //     switch (model.id) {

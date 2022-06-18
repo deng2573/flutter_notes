@@ -11,6 +11,9 @@ class Paths {
   static const home = '/home';
   static const simple = home + '/simple';
 
+  ///Demo
+  static const demo = '/demo';
+
   ///网页
   static const webview = '/webview';
 }

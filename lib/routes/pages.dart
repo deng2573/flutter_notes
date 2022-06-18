@@ -5,6 +5,7 @@ import 'package:notes/routes/paths.dart';
 import 'package:notes/splash.dart';
 import 'package:notes/modules/home/pages/home.dart';
 import 'package:notes/modules/simple/pages/simple.dart';
+import 'package:notes/modules/demo/pages/demo_nested.dart';
 
 class Pages {
   static const root = Paths.splash;
@@ -22,6 +23,10 @@ class Pages {
     GetPage(
       name: Paths.simple,
       page: () => const SimplePage(),
+    ),
+    GetPage(
+      name: Paths.demo,
+      page: () => const DemoNestedPage(),
     ),
   ];
 }

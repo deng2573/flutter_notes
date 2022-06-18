@@ -29,8 +29,13 @@ dependencies:
   logger: ^1.1.0
   # 文件目录
   path_provider: ^2.0.11
+  # 下拉刷新
+  flutter_easyrefresh: ^2.2.1
+  pull_to_refresh_notification: ^2.3.0
+  loading_more_list: any
   # 嵌套ScrollView
   extended_nested_scroll_view: ^5.1.2
+  
 
 dev_dependencies:
   flutter_test:
