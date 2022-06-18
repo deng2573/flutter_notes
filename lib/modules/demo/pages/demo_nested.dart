@@ -1,41 +1,25 @@
 import 'package:flutter/material.dart';
 
+import 'package:get/get.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 
 import 'package:notes/core/widgets/widget_refresh.dart';
 import 'package:notes/core/widgets/widget_tab_bar.dart';
 import 'package:notes/core/widgets/widget_button.dart';
 
-class DemoNestedPage extends StatefulWidget {
+import 'package:notes/modules/demo/controllers/nested_controller.dart';
+
+class DemoNestedPage extends GetView<NestedController> {
   const DemoNestedPage({Key? key}) : super(key: key);
 
   @override
-  _DemoNestedPageState createState() => _DemoNestedPageState();
-}
-
-class _DemoNestedPageState extends State<DemoNestedPage>
-    with SingleTickerProviderStateMixin {
-  List<String> _tabs = [];
-
-  late TabController _tabController;
-
-  final _key = GlobalKey<ExtendedNestedScrollViewState>();
-
-  @override
-  void initState() {
-    super.initState();
-    _tabs = ['关注', '推荐', '热榜', '视频', '圈子'];
-    _tabController = TabController(length: _tabs.length, vsync: this);
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final double statusBarHeight = MediaQuery.of(context).padding.top;
+    Get.put(NestedController());
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: ExtendedNestedScrollView(
-          key: _key,
+          key: controller.nestedkey,
           headerSliverBuilder: (
             BuildContext context,
             bool innerBoxIsScrolled,
@@ -46,32 +30,28 @@ class _DemoNestedPageState extends State<DemoNestedPage>
             ];
           },
           pinnedHeaderSliverHeightBuilder: () {
-            return statusBarHeight;
+            return MediaQuery.of(context).padding.top;
           },
-          body: TabBarView(
-            controller: _tabController,
-            children: List<Widget>.generate(
-              _tabs.length,
-              (index) {
-                return _ListViewPage();
-              },
-            ),
-          ),
+          body: Obx(() {
+            return TabBarView(
+              controller: controller.tabController,
+              children: List<Widget>.generate(
+                controller.tabs.length,
+                (index) {
+                  return _ListViewPage();
+                },
+              ),
+            );
+          }),
         ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
         child: const Icon(
-          Icons.add,
+          Icons.arrow_upward,
           color: Colors.black,
         ),
-        onPressed: () {
-          _key.currentState?.outerController.animateTo(
-            0.0,
-            duration: const Duration(seconds: 1),
-            curve: Curves.easeIn,
-          );
-        },
+        onPressed: controller.jumpTop,
       ),
     );
   }
@@ -86,12 +66,12 @@ class _DemoNestedPageState extends State<DemoNestedPage>
         automaticallyImplyLeading: true,
         leading: ScaleTap(
           child: const Icon(
-            Icons.menu,
+            Icons.add_a_photo,
             color: Colors.blue,
             size: 22.0,
           ),
           onPressed: () {
-            Navigator.pop(context);
+            // Navigator.pop(context);
           },
         ),
         titleSpacing: 18,
@@ -128,11 +108,11 @@ class _DemoNestedPageState extends State<DemoNestedPage>
         actions: [
           ScaleTap(
             child: const Icon(
-              Icons.add_a_photo,
+              Icons.refresh_sharp,
               color: Colors.blue,
               size: 22.0,
             ),
-            onPressed: () {},
+            onPressed: controller.updateTabs,
           ),
         ],
         elevation: 2.0,
@@ -142,31 +122,35 @@ class _DemoNestedPageState extends State<DemoNestedPage>
 
   Widget _buildTabHeader() {
     return SliverToBoxAdapter(
-      child: ScaleTabBar(
-          controller: _tabController,
-          labelColor: Colors.blue,
-          indicatorColor: Colors.blue,
-          indicatorSize: TabBarIndicatorSize.label,
-          indicatorWeight: 2.0,
-          isScrollable: false,
-          unselectedLabelColor: Colors.grey,
-          labelStyle: const TextStyle(
-            fontSize: 16.0,
-            fontWeight: FontWeight.bold,
-          ),
-          unselectedLabelStyle: const TextStyle(
-            fontSize: 14.0,
-            fontWeight: FontWeight.bold,
-          ),
-          tabs: List<Widget>.generate(
-            _tabs.length,
-            (index) {
-              return Tab(
-                text: _tabs[index],
-              );
-              // return Text('index');
-            },
-          )),
+      child: Obx(
+        () {
+          return ScaleTabBar(
+            controller: controller.tabController,
+            labelColor: Colors.blue,
+            indicatorColor: Colors.blue,
+            indicatorSize: TabBarIndicatorSize.label,
+            indicatorWeight: 2.0,
+            isScrollable: false,
+            unselectedLabelColor: Colors.grey,
+            labelStyle: const TextStyle(
+              fontSize: 16.0,
+              fontWeight: FontWeight.bold,
+            ),
+            unselectedLabelStyle: const TextStyle(
+              fontSize: 14.0,
+              fontWeight: FontWeight.bold,
+            ),
+            tabs: List<Widget>.generate(
+              controller.tabs.length,
+              (index) {
+                return Tab(
+                  text: controller.tabs[index],
+                );
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 }
