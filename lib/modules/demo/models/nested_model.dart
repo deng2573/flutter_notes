@@ -9,8 +9,9 @@ class NestedData with _$NestedData {
   const NestedData._();
 
   const factory NestedData({
-    required int id,
-    required List<NestedModel>? simples,
+    int? id,
+    String? name,
+    List<NestedModel>? list,
   }) = _NestedData;
 
   factory NestedData.fromJson(Map<String, dynamic> json) =>
@@ -22,8 +23,14 @@ class NestedModel with _$NestedModel {
   const NestedModel._();
 
   const factory NestedModel({
-    required int id,
-    required String? title,
+    int? id,
+    String? title,
+    String? content,
+    String? name,
+    String? avatar,
+    String? cover,
+    int? likeCount,
+    int? commentCount,
   }) = _NestedModel;
 
   factory NestedModel.fromJson(Map<String, dynamic> json) =>

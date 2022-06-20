@@ -35,6 +35,8 @@ dependencies:
   loading_more_list: any
   # 嵌套ScrollView
   extended_nested_scroll_view: ^5.1.2
+  # 图片
+  extended_image: ^6.2.1
   
 
 dev_dependencies:

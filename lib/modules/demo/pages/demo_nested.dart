@@ -7,6 +7,7 @@ import 'package:notes/core/widgets/widget_refresh.dart';
 import 'package:notes/core/widgets/widget_tab_bar.dart';
 import 'package:notes/core/widgets/widget_button.dart';
 
+import 'package:notes/modules/demo/models/nested_model.dart';
 import 'package:notes/modules/demo/controllers/nested_controller.dart';
 
 class DemoNestedPage extends GetView<NestedController> {
@@ -38,7 +39,8 @@ class DemoNestedPage extends GetView<NestedController> {
               children: List<Widget>.generate(
                 controller.tabs.length,
                 (index) {
-                  return _ListViewPage();
+                  final id = controller.dataList[index].id;
+                  return NestedListView(id: id ?? 0);
                 },
               ),
             );
@@ -70,9 +72,7 @@ class DemoNestedPage extends GetView<NestedController> {
             color: Colors.blue,
             size: 22.0,
           ),
-          onPressed: () {
-            // Navigator.pop(context);
-          },
+          onPressed: () {},
         ),
         titleSpacing: 18,
         title: Material(
@@ -112,7 +112,7 @@ class DemoNestedPage extends GetView<NestedController> {
               color: Colors.blue,
               size: 22.0,
             ),
-            onPressed: controller.updateTabs,
+            onPressed: controller.refreshData,
           ),
         ],
         elevation: 2.0,
@@ -155,63 +155,40 @@ class DemoNestedPage extends GetView<NestedController> {
   }
 }
 
-class _ListViewPage extends StatefulWidget {
-  @override
-  _ListViewPageState createState() => _ListViewPageState();
-}
+class NestedListView extends GetView<NestedListController> {
+  const NestedListView({
+    Key? key,
+    required this.id,
+  }) : super(key: key);
 
-class _ListViewPageState extends State<_ListViewPage>
-    with AutomaticKeepAliveClientMixin {
-  // List<SimpleHomeModel> itemList = [];
-
-  @override
-  bool get wantKeepAlive => true;
+  final int id;
 
   @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await _loadHomeData();
-    });
-  }
-
-  Future<void> _loadHomeData() async {
-    // String jsonData =
-    //     await rootBundle.loadString('assets/json/simple_home.json');
-    // List jsonResult = json.decode(jsonData);
-    // itemList = jsonResult.map((e) {
-    //   return SimpleHomeModel.fromJson(e as Map<String, dynamic>);
-    // }).toList();
-    setState(() {});
-  }
+  String? get tag => '$id';
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
+    Get.put(NestedListController(id: id), tag: '$id');
     return Refresh(
       onRefresh: () async {},
       onLoad: () async {},
       slivers: [
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (content, index) {
-              return _SimpleHomeItem();
-            },
-            childCount: 10,
-          ),
-        )
+        Obx(() {
+          return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (content, index) {
+                final item = controller.items[index];
+                return _buildItem(item);
+              },
+              childCount: controller.items.length,
+            ),
+          );
+        })
       ],
     );
   }
-}
 
-class _SimpleHomeItem extends StatelessWidget {
-  // final SimpleHomeModel model;
-
-  // _SimpleHomeItem({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildItem(NestedModel item) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 14),
       child: Column(
@@ -220,35 +197,31 @@ class _SimpleHomeItem extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            '标题',
+            item.title ?? '',
             textAlign: TextAlign.left,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20,
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Row(
             children: [
               SizedBox(
                 width: 30,
                 height: 30,
                 child: ClipOval(
-                  // child: Image.network(
-                  //   'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1603365312,3218205429&fm=26&gp=0.jpg',
-                  //   fit: BoxFit.fill,
-                  // ),
-                  child: Image.asset(
-                    '',
-                    fit: BoxFit.fill,
+                  child: Image.network(
+                    item.avatar ?? '',
+                    fit: BoxFit.cover,
                   ),
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Text(
-                '作者',
-                style: TextStyle(
+                item.name ?? '',
+                style: const TextStyle(
                   fontSize: 14,
                   color: Colors.black87,
                   fontWeight: FontWeight.w500,
@@ -256,24 +229,32 @@ class _SimpleHomeItem extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
-            '摘要',
-            style: TextStyle(
+            item.content ?? '',
+            style: const TextStyle(
               fontSize: 15,
               color: Colors.black87,
               fontWeight: FontWeight.w500,
             ),
           ),
-          SizedBox(height: 7),
+          const SizedBox(height: 7),
+          if (item.cover != null)
+            AspectRatio(
+              aspectRatio: 16 / 9,
+              child: Image.network(
+                item.cover ?? '',
+                fit: BoxFit.cover,
+              ),
+            ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
                 child: Text(
-                  '110 赞同 · 200 评论',
-                  style: TextStyle(
+                  '${item.likeCount ?? 0} 赞同 · ${item.commentCount ?? 0} 评论',
+                  style: const TextStyle(
                     fontSize: 13,
                     color: Colors.black54,
                     fontWeight: FontWeight.w500,
@@ -284,14 +265,14 @@ class _SimpleHomeItem extends StatelessWidget {
                 height: 20,
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: Icon(
+                  child: const Icon(
                     Icons.more_horiz,
                     size: 20,
                     color: Colors.black45,
                   ),
                   style: ButtonStyle(
                     elevation: MaterialStateProperty.all(0),
-                    minimumSize: MaterialStateProperty.all(Size(1, 1)),
+                    minimumSize: MaterialStateProperty.all(Size.zero),
                     padding: MaterialStateProperty.all(EdgeInsets.zero),
                     backgroundColor:
                         MaterialStateProperty.all(Colors.transparent),

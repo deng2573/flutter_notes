@@ -20,8 +20,9 @@ NestedData _$NestedDataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$NestedData {
-  int get id => throw _privateConstructorUsedError;
-  List<NestedModel>? get simples => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  List<NestedModel>? get list => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -34,7 +35,7 @@ abstract class $NestedDataCopyWith<$Res> {
   factory $NestedDataCopyWith(
           NestedData value, $Res Function(NestedData) then) =
       _$NestedDataCopyWithImpl<$Res>;
-  $Res call({int id, List<NestedModel>? simples});
+  $Res call({int? id, String? name, List<NestedModel>? list});
 }
 
 /// @nodoc
@@ -48,16 +49,21 @@ class _$NestedDataCopyWithImpl<$Res> implements $NestedDataCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? simples = freezed,
+    Object? name = freezed,
+    Object? list = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      simples: simples == freezed
-          ? _value.simples
-          : simples // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      list: list == freezed
+          ? _value.list
+          : list // ignore: cast_nullable_to_non_nullable
               as List<NestedModel>?,
     ));
   }
@@ -70,7 +76,7 @@ abstract class _$$_NestedDataCopyWith<$Res>
           _$_NestedData value, $Res Function(_$_NestedData) then) =
       __$$_NestedDataCopyWithImpl<$Res>;
   @override
-  $Res call({int id, List<NestedModel>? simples});
+  $Res call({int? id, String? name, List<NestedModel>? list});
 }
 
 /// @nodoc
@@ -86,16 +92,21 @@ class __$$_NestedDataCopyWithImpl<$Res> extends _$NestedDataCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? simples = freezed,
+    Object? name = freezed,
+    Object? list = freezed,
   }) {
     return _then(_$_NestedData(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      simples: simples == freezed
-          ? _value._simples
-          : simples // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      list: list == freezed
+          ? _value._list
+          : list // ignore: cast_nullable_to_non_nullable
               as List<NestedModel>?,
     ));
   }
@@ -104,20 +115,21 @@ class __$$_NestedDataCopyWithImpl<$Res> extends _$NestedDataCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_NestedData extends _NestedData {
-  const _$_NestedData(
-      {required this.id, required final List<NestedModel>? simples})
-      : _simples = simples,
+  const _$_NestedData({this.id, this.name, final List<NestedModel>? list})
+      : _list = list,
         super._();
 
   factory _$_NestedData.fromJson(Map<String, dynamic> json) =>
       _$$_NestedDataFromJson(json);
 
   @override
-  final int id;
-  final List<NestedModel>? _simples;
+  final int? id;
   @override
-  List<NestedModel>? get simples {
-    final value = _simples;
+  final String? name;
+  final List<NestedModel>? _list;
+  @override
+  List<NestedModel>? get list {
+    final value = _list;
     if (value == null) return null;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
@@ -125,7 +137,7 @@ class _$_NestedData extends _NestedData {
 
   @override
   String toString() {
-    return 'NestedData(id: $id, simples: $simples)';
+    return 'NestedData(id: $id, name: $name, list: $list)';
   }
 
   @override
@@ -134,7 +146,8 @@ class _$_NestedData extends _NestedData {
         (other.runtimeType == runtimeType &&
             other is _$_NestedData &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other._simples, _simples));
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other._list, _list));
   }
 
   @JsonKey(ignore: true)
@@ -142,7 +155,8 @@ class _$_NestedData extends _NestedData {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(_simples));
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(_list));
 
   @JsonKey(ignore: true)
   @override
@@ -157,17 +171,20 @@ class _$_NestedData extends _NestedData {
 
 abstract class _NestedData extends NestedData {
   const factory _NestedData(
-      {required final int id,
-      required final List<NestedModel>? simples}) = _$_NestedData;
+      {final int? id,
+      final String? name,
+      final List<NestedModel>? list}) = _$_NestedData;
   const _NestedData._() : super._();
 
   factory _NestedData.fromJson(Map<String, dynamic> json) =
       _$_NestedData.fromJson;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   @override
-  List<NestedModel>? get simples => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  @override
+  List<NestedModel>? get list => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_NestedDataCopyWith<_$_NestedData> get copyWith =>
@@ -180,8 +197,14 @@ NestedModel _$NestedModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$NestedModel {
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
+  String? get content => throw _privateConstructorUsedError;
+  String? get name => throw _privateConstructorUsedError;
+  String? get avatar => throw _privateConstructorUsedError;
+  String? get cover => throw _privateConstructorUsedError;
+  int? get likeCount => throw _privateConstructorUsedError;
+  int? get commentCount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -194,7 +217,15 @@ abstract class $NestedModelCopyWith<$Res> {
   factory $NestedModelCopyWith(
           NestedModel value, $Res Function(NestedModel) then) =
       _$NestedModelCopyWithImpl<$Res>;
-  $Res call({int id, String? title});
+  $Res call(
+      {int? id,
+      String? title,
+      String? content,
+      String? name,
+      String? avatar,
+      String? cover,
+      int? likeCount,
+      int? commentCount});
 }
 
 /// @nodoc
@@ -209,16 +240,46 @@ class _$NestedModelCopyWithImpl<$Res> implements $NestedModelCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? title = freezed,
+    Object? content = freezed,
+    Object? name = freezed,
+    Object? avatar = freezed,
+    Object? cover = freezed,
+    Object? likeCount = freezed,
+    Object? commentCount = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
+      content: content == freezed
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avatar: avatar == freezed
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cover: cover == freezed
+          ? _value.cover
+          : cover // ignore: cast_nullable_to_non_nullable
+              as String?,
+      likeCount: likeCount == freezed
+          ? _value.likeCount
+          : likeCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      commentCount: commentCount == freezed
+          ? _value.commentCount
+          : commentCount // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -230,7 +291,15 @@ abstract class _$$_NestedModelCopyWith<$Res>
           _$_NestedModel value, $Res Function(_$_NestedModel) then) =
       __$$_NestedModelCopyWithImpl<$Res>;
   @override
-  $Res call({int id, String? title});
+  $Res call(
+      {int? id,
+      String? title,
+      String? content,
+      String? name,
+      String? avatar,
+      String? cover,
+      int? likeCount,
+      int? commentCount});
 }
 
 /// @nodoc
@@ -247,16 +316,46 @@ class __$$_NestedModelCopyWithImpl<$Res> extends _$NestedModelCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? title = freezed,
+    Object? content = freezed,
+    Object? name = freezed,
+    Object? avatar = freezed,
+    Object? cover = freezed,
+    Object? likeCount = freezed,
+    Object? commentCount = freezed,
   }) {
     return _then(_$_NestedModel(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       title: title == freezed
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
+      content: content == freezed
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String?,
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avatar: avatar == freezed
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cover: cover == freezed
+          ? _value.cover
+          : cover // ignore: cast_nullable_to_non_nullable
+              as String?,
+      likeCount: likeCount == freezed
+          ? _value.likeCount
+          : likeCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      commentCount: commentCount == freezed
+          ? _value.commentCount
+          : commentCount // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -264,19 +363,40 @@ class __$$_NestedModelCopyWithImpl<$Res> extends _$NestedModelCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_NestedModel extends _NestedModel {
-  const _$_NestedModel({required this.id, required this.title}) : super._();
+  const _$_NestedModel(
+      {this.id,
+      this.title,
+      this.content,
+      this.name,
+      this.avatar,
+      this.cover,
+      this.likeCount,
+      this.commentCount})
+      : super._();
 
   factory _$_NestedModel.fromJson(Map<String, dynamic> json) =>
       _$$_NestedModelFromJson(json);
 
   @override
-  final int id;
+  final int? id;
   @override
   final String? title;
+  @override
+  final String? content;
+  @override
+  final String? name;
+  @override
+  final String? avatar;
+  @override
+  final String? cover;
+  @override
+  final int? likeCount;
+  @override
+  final int? commentCount;
 
   @override
   String toString() {
-    return 'NestedModel(id: $id, title: $title)';
+    return 'NestedModel(id: $id, title: $title, content: $content, name: $name, avatar: $avatar, cover: $cover, likeCount: $likeCount, commentCount: $commentCount)';
   }
 
   @override
@@ -285,7 +405,14 @@ class _$_NestedModel extends _NestedModel {
         (other.runtimeType == runtimeType &&
             other is _$_NestedModel &&
             const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.title, title));
+            const DeepCollectionEquality().equals(other.title, title) &&
+            const DeepCollectionEquality().equals(other.content, content) &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.avatar, avatar) &&
+            const DeepCollectionEquality().equals(other.cover, cover) &&
+            const DeepCollectionEquality().equals(other.likeCount, likeCount) &&
+            const DeepCollectionEquality()
+                .equals(other.commentCount, commentCount));
   }
 
   @JsonKey(ignore: true)
@@ -293,7 +420,13 @@ class _$_NestedModel extends _NestedModel {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(title));
+      const DeepCollectionEquality().hash(title),
+      const DeepCollectionEquality().hash(content),
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(avatar),
+      const DeepCollectionEquality().hash(cover),
+      const DeepCollectionEquality().hash(likeCount),
+      const DeepCollectionEquality().hash(commentCount));
 
   @JsonKey(ignore: true)
   @override
@@ -308,16 +441,35 @@ class _$_NestedModel extends _NestedModel {
 
 abstract class _NestedModel extends NestedModel {
   const factory _NestedModel(
-      {required final int id, required final String? title}) = _$_NestedModel;
+      {final int? id,
+      final String? title,
+      final String? content,
+      final String? name,
+      final String? avatar,
+      final String? cover,
+      final int? likeCount,
+      final int? commentCount}) = _$_NestedModel;
   const _NestedModel._() : super._();
 
   factory _NestedModel.fromJson(Map<String, dynamic> json) =
       _$_NestedModel.fromJson;
 
   @override
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   @override
   String? get title => throw _privateConstructorUsedError;
+  @override
+  String? get content => throw _privateConstructorUsedError;
+  @override
+  String? get name => throw _privateConstructorUsedError;
+  @override
+  String? get avatar => throw _privateConstructorUsedError;
+  @override
+  String? get cover => throw _privateConstructorUsedError;
+  @override
+  int? get likeCount => throw _privateConstructorUsedError;
+  @override
+  int? get commentCount => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_NestedModelCopyWith<_$_NestedModel> get copyWith =>
