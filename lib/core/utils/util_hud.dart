@@ -128,7 +128,7 @@ class LoadingAnimation extends StatefulWidget {
       : super(key: key);
 
   @override
-  _LoadingAnimationState createState() => _LoadingAnimationState();
+  State<LoadingAnimation> createState() => _LoadingAnimationState();
 }
 
 class _LoadingAnimationState extends State<LoadingAnimation>
@@ -284,13 +284,13 @@ class AlterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final leanCancel = onCancel != null || textCancel != null;
     final leanConfirm = onConfirm != null || textConfirm != null;
-    final _actions = [...actions];
+    final actions = [...this.actions];
 
     if (cancel != null) {
-      _actions.add(cancel!);
+      actions.add(cancel!);
     } else {
       if (leanCancel) {
-        _actions.add(ElevatedButton(
+        actions.add(ElevatedButton(
           style: ElevatedButton.styleFrom(
             primary: cancelButtonColor,
           ),
@@ -310,10 +310,10 @@ class AlterWidget extends StatelessWidget {
       }
     }
     if (confirm != null) {
-      _actions.add(confirm!);
+      actions.add(confirm!);
     } else {
       if (leanConfirm) {
-        _actions.add(
+        actions.add(
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               primary: confirmButtonColor ?? Colors.black,
@@ -379,7 +379,7 @@ class AlterWidget extends StatelessWidget {
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: _actions.map((e) => Expanded(child: e)).toList(),
+              children: actions.map((e) => Expanded(child: e)).toList(),
             ),
           ),
         ],

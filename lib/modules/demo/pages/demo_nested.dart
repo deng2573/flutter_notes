@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
+import 'package:notes/core/widgets/widget_image.dart';
 
 import 'package:notes/core/widgets/widget_refresh.dart';
 import 'package:notes/core/widgets/widget_tab_bar.dart';
@@ -49,11 +50,11 @@ class DemoNestedPage extends GetView<NestedController> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
+        onPressed: controller.jumpTop,
         child: const Icon(
           Icons.arrow_upward,
           color: Colors.black,
         ),
-        onPressed: controller.jumpTop,
       ),
     );
   }
@@ -107,12 +108,12 @@ class DemoNestedPage extends GetView<NestedController> {
         ),
         actions: [
           ScaleTap(
+            onPressed: controller.refreshData,
             child: const Icon(
               Icons.refresh_sharp,
               color: Colors.blue,
               size: 22.0,
             ),
-            onPressed: controller.refreshData,
           ),
         ],
         elevation: 2.0,
@@ -169,23 +170,47 @@ class NestedListView extends GetView<NestedListController> {
   @override
   Widget build(BuildContext context) {
     Get.put(NestedListController(id: id), tag: '$id');
-    return Refresh(
+    return Refresh.child(
       onRefresh: () async {},
       onLoad: () async {},
-      slivers: [
-        Obx(() {
-          return SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (content, index) {
-                final item = controller.items[index];
-                return _buildItem(item);
-              },
-              childCount: controller.items.length,
-            ),
-          );
-        })
-      ],
+      child: Obx(() {
+        return ListView.builder(
+          itemBuilder: (context, index) {
+            final item = controller.items[index];
+            return _buildItem(item);
+          },
+          itemCount: controller.items.length,
+        );
+      }),
     );
+    // return Refresh.slivers(
+    //   onRefresh: () async {},
+    //   onLoad: () async {},
+    //   slivers: [
+    //     Obx(() {
+    //       return SliverList(
+    //         delegate: SliverChildBuilderDelegate(
+    //           (content, index) {
+    //             final item = controller.items[index];
+    //             return _buildItem(item);
+    //           },
+    //           childCount: controller.items.length,
+    //         ),
+    //       );
+    //     }),
+    //     Obx(() {
+    //       return SliverList(
+    //         delegate: SliverChildBuilderDelegate(
+    //           (content, index) {
+    //             final item = controller.items[index];
+    //             return _buildItem(item);
+    //           },
+    //           childCount: controller.items.length,
+    //         ),
+    //       );
+    //     })
+    //   ],
+    // );
   }
 
   Widget _buildItem(NestedModel item) {
@@ -212,9 +237,8 @@ class NestedListView extends GetView<NestedListController> {
                 width: 30,
                 height: 30,
                 child: ClipOval(
-                  child: Image.network(
+                  child: CacheImage.url(
                     item.avatar ?? '',
-                    fit: BoxFit.cover,
                   ),
                 ),
               ),
@@ -242,9 +266,8 @@ class NestedListView extends GetView<NestedListController> {
           if (item.cover != null)
             AspectRatio(
               aspectRatio: 16 / 9,
-              child: Image.network(
+              child: CacheImage.url(
                 item.cover ?? '',
-                fit: BoxFit.cover,
               ),
             ),
           Row(
@@ -265,17 +288,17 @@ class NestedListView extends GetView<NestedListController> {
                 height: 20,
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: const Icon(
-                    Icons.more_horiz,
-                    size: 20,
-                    color: Colors.black45,
-                  ),
                   style: ButtonStyle(
                     elevation: MaterialStateProperty.all(0),
                     minimumSize: MaterialStateProperty.all(Size.zero),
                     padding: MaterialStateProperty.all(EdgeInsets.zero),
                     backgroundColor:
                         MaterialStateProperty.all(Colors.transparent),
+                  ),
+                  child: const Icon(
+                    Icons.more_horiz,
+                    size: 20,
+                    color: Colors.black45,
                   ),
                 ),
               ),

@@ -1,5 +1,6 @@
 name: notes
 description: Flutter Notes
+publish_to: 'none'
 
 version: 1.0.0+1
 
@@ -22,7 +23,7 @@ dependencies:
   # 键盘监听
   flutter_keyboard_visibility: ^5.2.0
   # 设备信息
-  device_info_plus: ^3.2.4
+  device_info_plus: ^4.0.0
   # Loading Toast Dialog
   flutter_smart_dialog: ^4.5.2
   # 日志
@@ -30,19 +31,22 @@ dependencies:
   # 文件目录
   path_provider: ^2.0.11
   # 下拉刷新
-  flutter_easyrefresh: ^2.2.1
+  # flutter_easyrefresh: ^2.2.1
+  flutter_easy_refresh: 
+    git: 
+      url: 'https://github.com/xuelongqy/flutter_easyrefresh.git'
+      ref: 'v3'
   pull_to_refresh_notification: ^2.3.0
   loading_more_list: any
   # 嵌套ScrollView
-  extended_nested_scroll_view: ^5.1.2
+  extended_nested_scroll_view: ^6.0.0-dev.1
   # 图片
   extended_image: ^6.2.1
   
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+  flutter_lints: ^2.0.1
   # 序列化
   build_runner: ^2.1.11
   json_serializable: ^6.2.0

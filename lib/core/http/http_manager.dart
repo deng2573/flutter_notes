@@ -38,7 +38,7 @@ class Http {
       final response = await _client.request(url, queryParameters: params);
       final result = HttpResult.fromJson(response.data);
       return result;
-    } on DioError catch (e, _) {
+    } on DioError catch (e) {
       final error = HttpException.getException(e);
       if (error is BusinessException) {
         if (toast) HUD.toast(msg: error.msg);

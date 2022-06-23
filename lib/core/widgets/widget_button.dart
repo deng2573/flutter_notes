@@ -22,7 +22,7 @@ class TouchableHighlight extends StatefulWidget {
   final Color activeColor;
   final bool disabled;
   @override
-  _TouchableHighlightState createState() => _TouchableHighlightState();
+  State<TouchableHighlight> createState() => _TouchableHighlightState();
 }
 
 class _TouchableHighlightState extends State<TouchableHighlight> {
@@ -102,7 +102,7 @@ class TouchableOpacity extends StatefulWidget {
   final double opacity;
 
   @override
-  _TouchableOpacityState createState() => _TouchableOpacityState();
+  State<TouchableOpacity> createState() => _TouchableOpacityState();
 }
 
 class _TouchableOpacityState extends State<TouchableOpacity> {
@@ -168,7 +168,7 @@ class ScaleTap extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _ScaleTapState createState() => _ScaleTapState();
+  State<ScaleTap> createState() => _ScaleTapState();
 }
 
 class _ScaleTapState extends State<ScaleTap>

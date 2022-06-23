@@ -86,7 +86,7 @@ class NestedListController extends GetxController {
       items.clear();
     }
     items.addAll(data);
-    refreshController.refreshSucess(noMore: data.length < 10);
+    refreshController.refreshFinish(noMore: data.length < 10);
   }
 
   Future<List<NestedModel>> _loadData() async {

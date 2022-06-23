@@ -1,41 +1,70 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_easyrefresh/easy_refresh.dart';
+import 'package:flutter_easy_refresh/easy_refresh.dart';
 
 class Refresh extends StatelessWidget {
-  final EasyRefreshController? controller;
-  final OnRefreshCallback? onRefresh;
-  final OnLoadCallback? onLoad;
-  final List<Widget> slivers;
+  final RefreshController? controller;
+  final FutureOr Function()? onRefresh;
+  final FutureOr Function()? onLoad;
+  final Widget? child;
+  final List<Widget>? slivers;
 
-  const Refresh({
+  const Refresh.child({
+    Key? key,
+    this.controller,
+    this.onRefresh,
+    this.onLoad,
+    required this.child,
+  })  : slivers = null,
+        super(key: key);
+
+  const Refresh.slivers({
     Key? key,
     this.controller,
     this.onRefresh,
     this.onLoad,
     required this.slivers,
-  }) : super(key: key);
+  })  : child = null,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return EasyRefresh.custom(
-      controller: controller,
-      onRefresh: onRefresh,
-      onLoad: onLoad,
-      slivers: slivers,
-    );
+    return child != null
+        ? EasyRefresh(
+            controller: controller,
+            onRefresh: onRefresh,
+            onLoad: onLoad,
+            child: child,
+          )
+        : EasyRefresh.builder(
+            controller: controller,
+            onRefresh: onRefresh,
+            onLoad: onLoad,
+            childBuilder: (context, physics) {
+              return CustomScrollView(
+                physics: physics,
+                slivers: slivers ?? [],
+              );
+            },
+          );
   }
 }
 
 class RefreshController extends EasyRefreshController {
-  void refreshSucess({
+  void refreshFinish({
     bool noMore = false,
   }) {
-    finishRefresh(success: true, noMore: noMore);
+    finishRefresh(
+      noMore ? IndicatorResult.succeeded : IndicatorResult.noMore,
+    );
   }
 
-  void loadSuccess({
+  void loadFinish({
     bool noMore = false,
   }) {
-    finishLoad(success: true, noMore: noMore);
+    finishLoad(
+      noMore ? IndicatorResult.succeeded : IndicatorResult.noMore,
+    );
   }
 }

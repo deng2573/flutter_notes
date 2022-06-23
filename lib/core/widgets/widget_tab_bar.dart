@@ -66,11 +66,11 @@ class _TabStyle extends AnimatedWidget {
         : Color.lerp(unselectedColor, selectedColor, animation.value);
 
     ///根据前后字体大小计算缩放倍率
-    final double _magnification =
+    final double magnification =
         labelStyle!.fontSize! / unselectedLabelStyle!.fontSize!;
-    final double _scale = (selected
-        ? lerpDouble(_magnification, 1, animation.value)
-        : lerpDouble(1, _magnification, animation.value))!;
+    final double scale = (selected
+        ? lerpDouble(magnification, 1, animation.value)
+        : lerpDouble(1, magnification, animation.value))!;
 
     return DefaultTextStyle(
       style: textStyle!.copyWith(
@@ -87,7 +87,7 @@ class _TabStyle extends AnimatedWidget {
 
         ///添加一个缩放外壳
         child: Transform.scale(
-          scale: _scale,
+          scale: scale,
           child: child,
         ),
       ),
@@ -197,8 +197,9 @@ double _indexChangeProgress(TabController controller) {
 
   // The controller's offset is changing because the user is dragging the
   // TabBarView's PageView to the left or right.
-  if (!controller.indexIsChanging)
+  if (!controller.indexIsChanging) {
     return (currentIndex - controllerValue).abs().clamp(0.0, 1.0);
+  }
 
   // The TabController animation's value is changing from previousIndex to currentIndex.
   return (controllerValue - currentIndex).abs() /
@@ -214,8 +215,9 @@ class _IndicatorPainter extends CustomPainter {
     required _IndicatorPainter? old,
     required this.indicatorPadding,
   }) : super(repaint: controller.animation) {
-    if (old != null)
+    if (old != null) {
       saveTabOffsets(old._currentTabOffsets, old._currentTextDirection);
+    }
   }
 
   final TabController controller;
@@ -658,7 +660,7 @@ class ScaleTabBar extends StatefulWidget implements PreferredSizeWidget {
   }
 
   @override
-  _ScaleTabBarState createState() => _ScaleTabBarState();
+  State<ScaleTabBar> createState() => _ScaleTabBarState();
 }
 
 class _ScaleTabBarState extends State<ScaleTabBar> {
@@ -848,21 +850,21 @@ class _ScaleTabBarState extends State<ScaleTabBar> {
     final double index = _controller!.index.toDouble();
     final double value = _controller!.animation!.value;
     double offset;
-    if (value == index - 1.0)
+    if (value == index - 1.0) {
       offset = leadingPosition ?? middlePosition;
-    else if (value == index + 1.0)
+    } else if (value == index + 1.0) {
       offset = trailingPosition ?? middlePosition;
-    else if (value == index)
+    } else if (value == index) {
       offset = middlePosition;
-    else if (value < index)
+    } else if (value < index) {
       offset = (leadingPosition == null
           ? middlePosition
           : lerpDouble(middlePosition, leadingPosition, index - value))!;
-    else
+    } else {
       offset = (trailingPosition == null
           ? middlePosition
           : lerpDouble(middlePosition, trailingPosition, value - index))!;
-
+    }
     _scrollController!.jumpTo(offset);
   }
 
