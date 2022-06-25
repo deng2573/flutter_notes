@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import 'package:notes/modules/simple/models/simple_model.dart';
-import 'package:notes/modules/simple/controllers/simple_controller.dart';
+import 'package:notes/modules/sample/models/sample_model.dart';
+import 'package:notes/modules/sample/controllers/sample_controller.dart';
 
-class SimplePage extends GetView<SimpleController> {
-  const SimplePage({Key? key}) : super(key: key);
+class SamplePage extends GetView<SampleController> {
+  const SamplePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Get.put(SimpleController());
+    Get.put(SampleController());
     return Scaffold(
       appBar: AppBar(),
       body: Obx(() {
@@ -18,7 +18,7 @@ class SimplePage extends GetView<SimpleController> {
         return ListView.builder(
           itemBuilder: (context, index) {
             final item = items[index];
-            return _buildSimpleItem(item);
+            return _buildSampleItem(item);
           },
           itemCount: items.length,
         );
@@ -26,11 +26,11 @@ class SimplePage extends GetView<SimpleController> {
     );
   }
 
-  Widget _buildSimpleItem(SimpleModel item) {
+  Widget _buildSampleItem(SampleModel item) {
     return InkWell(
       enableFeedback: false,
       onTap: () {
-        controller.openSimplePage(item);
+        controller.openSamplePage(item);
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),

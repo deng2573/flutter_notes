@@ -9,7 +9,7 @@ class Paths {
 
   ///首页
   static const home = '/home';
-  static const simple = '$home/simple';
+  static const sample = '$home/sample';
 
   ///Demo
   static const demo = '/demo';

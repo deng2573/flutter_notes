@@ -21,7 +21,7 @@ class HomeController extends GetxController {
     items.value = result.map((e) => HomeModel.fromJson(e)).toList();
   }
 
-  void openSimplePage(HomeModel item) {
-    Get.toNamed(Paths.simple, arguments: item.id);
+  void openSamplePage(HomeModel item) {
+    Get.toNamed(Paths.sample, arguments: item.id);
   }
 }

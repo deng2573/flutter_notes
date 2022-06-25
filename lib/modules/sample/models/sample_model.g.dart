@@ -1,32 +1,32 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'simple_model.dart';
+part of 'sample_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SimpleData _$$_SimpleDataFromJson(Map<String, dynamic> json) =>
-    _$_SimpleData(
+_$_SampleData _$$_SampleDataFromJson(Map<String, dynamic> json) =>
+    _$_SampleData(
       id: json['id'] as int,
-      simples: (json['simples'] as List<dynamic>?)
-          ?.map((e) => SimpleModel.fromJson(e as Map<String, dynamic>))
+      samples: (json['samples'] as List<dynamic>?)
+          ?.map((e) => SampleModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$_SimpleDataToJson(_$_SimpleData instance) =>
+Map<String, dynamic> _$$_SampleDataToJson(_$_SampleData instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'simples': instance.simples,
+      'samples': instance.samples,
     };
 
-_$_SimpleModel _$$_SimpleModelFromJson(Map<String, dynamic> json) =>
-    _$_SimpleModel(
+_$_SampleModel _$$_SampleModelFromJson(Map<String, dynamic> json) =>
+    _$_SampleModel(
       id: json['id'] as int,
       title: json['title'] as String?,
     );
 
-Map<String, dynamic> _$$_SimpleModelToJson(_$_SimpleModel instance) =>
+Map<String, dynamic> _$$_SampleModelToJson(_$_SampleModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'title': instance.title,

@@ -2,13 +2,13 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
-import 'package:notes/modules/simple/models/simple_model.dart';
+import 'package:notes/modules/sample/models/sample_model.dart';
 import 'package:notes/routes/paths.dart';
 
-class SimpleController extends GetxController {
+class SampleController extends GetxController {
   late final int id;
 
-  final items = <SimpleModel>[].obs;
+  final items = <SampleModel>[].obs;
 
   @override
   void onInit() {
@@ -23,15 +23,15 @@ class SimpleController extends GetxController {
   }
 
   Future<void> _loadItems() async {
-    final data = await rootBundle.loadString('assets/json/simple.json');
+    final data = await rootBundle.loadString('assets/json/sample.json');
     final result = json.decode(data) as List<dynamic>;
-    final list = result.map((e) => SimpleData.fromJson(e)).toList();
-    items.value = list.firstWhere((e) => e.id == id).simples ?? [];
+    final list = result.map((e) => SampleData.fromJson(e)).toList();
+    items.value = list.firstWhere((e) => e.id == id).samples ?? [];
   }
 
-  void openSimplePage(SimpleModel item) {
+  void openSamplePage(SampleModel item) {
     Get.toNamed(Paths.demo);
-    //  switch (widget.simple) {
+    //  switch (widget.sample) {
     //   case 'utils':
     //     switch (model.id) {
     //       case 0:

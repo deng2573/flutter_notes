@@ -30,7 +30,7 @@ class HomePage extends GetView<HomeController> {
     return InkWell(
       enableFeedback: false,
       onTap: () {
-        controller.openSimplePage(item);
+        controller.openSamplePage(item);
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 16),
