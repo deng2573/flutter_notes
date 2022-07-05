@@ -1,11 +1,11 @@
 import 'package:get/get.dart';
-import 'package:notes/modules/sample/pages/sample.dart';
 
 import 'package:notes/routes/paths.dart';
 
 import 'package:notes/splash.dart';
 import 'package:notes/modules/home/pages/home.dart';
-import 'package:notes/modules/demo/pages/demo_nested.dart';
+import 'package:notes/modules/sample/pages/sample.dart';
+import 'package:notes/modules/demo/nested/pages/demo_nested.dart';
 
 class Pages {
   static const root = Paths.splash;
@@ -25,7 +25,7 @@ class Pages {
       page: () => const SamplePage(),
     ),
     GetPage(
-      name: Paths.demo,
+      name: Paths.demoNested,
       page: () => const DemoNestedPage(),
     ),
   ];

@@ -27,8 +27,8 @@ class HUD {
     );
   }
 
-  static void alter() {
-    HUD.dialog(const AlterWidget());
+  static Future<void> alter() async {
+    await HUD.dialog(const AlterWidget());
   }
 
   static Future<T?> dialog<T>(Widget widget) async {

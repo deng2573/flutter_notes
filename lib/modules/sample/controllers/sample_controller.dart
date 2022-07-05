@@ -2,8 +2,10 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
+import 'package:notes/modules/demo/demo_controller.dart';
+import 'package:notes/modules/utils/controllers/utils_controller.dart';
+
 import 'package:notes/modules/sample/models/sample_model.dart';
-import 'package:notes/routes/paths.dart';
 
 class SampleController extends GetxController {
   late final int id;
@@ -30,39 +32,15 @@ class SampleController extends GetxController {
   }
 
   void openSamplePage(SampleModel item) {
-    Get.toNamed(Paths.demo);
-    //  switch (widget.sample) {
-    //   case 'utils':
-    //     switch (model.id) {
-    //       case 0:
-    //         HUD.loading();
-    //         await Future.delayed(const Duration(seconds: 5));
-    //         HUD.dismiss();
-    //         break;
-    //       case 1:
-    //         HUD.toast(msg: '加载成功');
-    //         break;
-    //       case 2:
-    //         HUD.loading();
-    //         break;
-    //       case 3:
-    //         HUD.loading();
-    //         break;
-    //       case 4:
-    //         Input.show(
-    //           context: context,
-    //           hintText: '请输入',
-    //         );
-    //         break;
-    //       case 5:
-    //         Log.i('verbose1');
-    //         Log.d('verbose1');
-    //         Log.w('verbose1');
-    //         Log.e('error1');
-    //         Log.e('error2');
-    //         Log.e('error3');
-    //         break;
-    //     }
-    // }
+    switch (id) {
+      case 0:
+        final c = Get.put(UtilsController());
+        c.openUtils(item.id);
+        break;
+      case 2:
+        final c = Get.put(DemoController());
+        c.openDemo(item.id);
+        break;
+    }
   }
 }

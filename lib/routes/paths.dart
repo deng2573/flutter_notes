@@ -11,8 +11,12 @@ class Paths {
   static const home = '/home';
   static const sample = '$home/sample';
 
+  ///Utils
+  static const utils = '$sample/utils';
+
   ///Demo
   static const demo = '/demo';
+  static const demoNested = '$demo/nested';
 
   ///网页
   static const webview = '/webview';
