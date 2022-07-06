@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 
 import 'package:notes/core/widgets/widget_button.dart';
 import 'package:notes/core/widgets/widget_image.dart';
-import 'package:notes/modules/demo/web3/controllers/web3_controller.dart';
-import 'package:notes/modules/demo/web3/models/web3_model.dart';
+import 'package:notes/modules/demos/web3/controllers/web3_controller.dart';
+import 'package:notes/modules/demos/web3/models/web3_model.dart';
 
 class RankingListView extends GetView<DemoWeb3Controller> {
   const RankingListView({Key? key}) : super(key: key);

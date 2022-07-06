@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
-import 'package:notes/core/widgets/widget_image.dart';
 
+import 'package:notes/core/widgets/widget_image.dart';
 import 'package:notes/core/widgets/widget_refresh.dart';
 import 'package:notes/core/widgets/widget_tab_bar.dart';
 import 'package:notes/core/widgets/widget_button.dart';
 
-import 'package:notes/modules/demo/nested/models/nested_model.dart';
-import 'package:notes/modules/demo/nested/controllers/nested_controller.dart';
+import 'package:notes/modules/demos/nested/models/nested_model.dart';
+import 'package:notes/modules/demos/nested/controllers/nested_controller.dart';
 
 class DemoNestedPage extends GetView<NestedController> {
   const DemoNestedPage({Key? key}) : super(key: key);

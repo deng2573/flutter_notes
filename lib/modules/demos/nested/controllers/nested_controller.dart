@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 
 import 'package:notes/core/widgets/widget_refresh.dart';
-import 'package:notes/modules/demo/nested/models/nested_model.dart';
+import 'package:notes/modules/demos/nested/models/nested_model.dart';
 
 class NestedController extends GetxController with GetTickerProviderStateMixin {
   final dataList = <NestedData>[];

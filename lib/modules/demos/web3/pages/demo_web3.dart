@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:notes/core/widgets/widget_button.dart';
-import 'package:notes/modules/demo/web3/widgets/list_header.dart';
-import 'package:notes/modules/demo/web3/widgets/list_market.dart';
-import 'package:notes/modules/demo/web3/widgets/list_ranking.dart';
-import 'package:notes/modules/demo/web3/widgets/list_recommend.dart';
+import 'package:notes/modules/demos/web3/widgets/list_header.dart';
+import 'package:notes/modules/demos/web3/widgets/list_market.dart';
+import 'package:notes/modules/demos/web3/widgets/list_ranking.dart';
+import 'package:notes/modules/demos/web3/widgets/list_recommend.dart';
 
-import 'package:notes/modules/demo/web3/controllers/web3_controller.dart';
+import 'package:notes/modules/demos/web3/controllers/web3_controller.dart';
 
 class DemoWeb3Page extends GetView<DemoWeb3Controller> {
   const DemoWeb3Page({Key? key}) : super(key: key);

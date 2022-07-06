@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
-import 'package:notes/modules/demo/demo_controller.dart';
+import 'package:notes/modules/demos/demo_controller.dart';
 import 'package:notes/modules/utils/controllers/utils_controller.dart';
 
 import 'package:notes/modules/sample/models/sample_model.dart';

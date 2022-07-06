@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
-import 'package:notes/modules/demo/web3/models/web3_model.dart';
+import 'package:notes/modules/demos/web3/models/web3_model.dart';
 
 class DemoWeb3Controller extends GetxController {
   final recommendList = <RecommendModel>[].obs;

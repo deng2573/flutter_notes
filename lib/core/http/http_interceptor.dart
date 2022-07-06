@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:notes/config.dart';
+import 'package:notes/config/config.dart';
 import 'package:notes/core/http/http_exception.dart';
 import 'package:notes/core/http/http_result.dart';
 
