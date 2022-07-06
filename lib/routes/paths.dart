@@ -17,6 +17,7 @@ class Paths {
   ///Demo
   static const demo = '/demo';
   static const demoNested = '$demo/nested';
+  static const demoWeb3 = '$demo/demoWeb3';
 
   ///网页
   static const webview = '/webview';

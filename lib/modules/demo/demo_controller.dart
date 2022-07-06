@@ -8,6 +8,7 @@ class DemoController extends GetxController {
         Get.toNamed(Paths.demoNested);
         break;
       case 1:
+        Get.toNamed(Paths.demoWeb3);
         break;
       case 2:
         break;
