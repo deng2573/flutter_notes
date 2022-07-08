@@ -20,7 +20,7 @@ class _SplashState extends State<Splash> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       HUD.loading();
       await Application.init();
-      await Future.delayed(const Duration(seconds: 2));
+      await Future.delayed(const Duration(seconds: 1));
       Get.offAllNamed(Paths.home);
       HUD.dismiss();
     });

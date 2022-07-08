@@ -11,6 +11,7 @@ class DemoController extends GetxController {
         Get.toNamed(Paths.demoWeb3);
         break;
       case 2:
+        Get.toNamed(Paths.demoChat);
         break;
     }
   }

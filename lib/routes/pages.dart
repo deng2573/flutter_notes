@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:notes/modules/demos/im/pages/im_chat.dart';
 
 import 'package:notes/routes/paths.dart';
 
@@ -32,6 +33,10 @@ class Pages {
     GetPage(
       name: Paths.demoWeb3,
       page: () => const DemoWeb3Page(),
+    ),
+    GetPage(
+      name: Paths.demoChat,
+      page: () => const ChatPage(),
     ),
   ];
 }

@@ -42,11 +42,25 @@ dependencies:
   extended_nested_scroll_view: ^6.0.0-dev.1
   # 图片
   extended_image: ^6.2.1
+  # IM 聊天界面
+  # flutter_openim_widget: ^2.1.0
+  # flutter_screenutil: ^5.5.3+2
+  # flutter_openim_widget:
+  #   path: ../flutter_openim_widget
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  #代码规范
   flutter_lints: ^2.0.1
+  #代码调试
+  flutter_ume: ^1.0.1
+  flutter_ume_kit_ui: ^1.0.0
+  flutter_ume_kit_device: ^1.0.0
+  flutter_ume_kit_perf: ^1.0.0
+  flutter_ume_kit_show_code: ^1.0.0
+  flutter_ume_kit_console: ^1.0.0
+  flutter_ume_kit_dio: ^1.0.0
   # 序列化
   build_runner: ^2.1.11
   json_serializable: ^6.2.0
