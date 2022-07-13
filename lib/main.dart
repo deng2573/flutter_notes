@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:notes/routes/pages.dart';
 import 'package:notes/theme.dart';
 import 'package:notes/core/utils/util_hud.dart';
+import 'package:flutter_persistent_keyboard_height/flutter_persistent_keyboard_height.dart';
 
 void main() => runApp(const App());
 
@@ -15,7 +16,13 @@ class App extends StatelessWidget {
       title: 'Notes',
       useInheritedMediaQuery: true,
       navigatorObservers: [HUD.observer],
-      builder: HUD.init(),
+      builder: (context, child) {
+        final hudBuilder = HUD.init();
+        child = hudBuilder(context, child);
+        return PersistentKeyboardHeightProvider(
+          child: child,
+        );
+      },
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       getPages: Pages.routes,
