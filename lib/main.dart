@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
-import 'package:notes/routes/pages.dart';
+
 import 'package:notes/theme.dart';
+import 'package:notes/routes/pages.dart';
 import 'package:notes/core/utils/util_hud.dart';
 import 'package:flutter_persistent_keyboard_height/flutter_persistent_keyboard_height.dart';
 

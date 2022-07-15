@@ -38,12 +38,20 @@ class ChatInputState extends State<ChatInput> {
   final _emojiHeight = 300.0;
 
   bool _showTools = false;
-  final _toolsHeight = 190.0;
+  final _toolsHeight = 200.0;
+
+  double paddingBottom = 0.0;
 
   @override
   void initState() {
     super.initState();
     _addKeyboardListener();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        paddingBottom = MediaQuery.of(context).padding.bottom;
+        setState(() {});
+      }
+    });
   }
 
   @override
@@ -51,7 +59,14 @@ class ChatInputState extends State<ChatInput> {
     _keyboardHeight = PersistentKeyboardHeight.of(context).keyboardHeight;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: SafeArea(
+      body: GestureDetector(
+        onTap: () {
+          if (mounted) {
+            _showEmoji = false;
+            _showTools = false;
+            _close();
+          }
+        },
         child: Column(
           children: [
             Expanded(
@@ -79,16 +94,18 @@ class ChatInputState extends State<ChatInput> {
             ),
             AnimatedContainer(
               height: _showTools
-                  ? _toolsHeight
+                  ? _toolsHeight + paddingBottom
                   : (_showEmoji
-                      ? _emojiHeight
-                      : (_keyboardVisible ? _keyboardHeight : 0.0)),
+                      ? _emojiHeight + paddingBottom
+                      : (_keyboardVisible
+                          ? _keyboardHeight
+                          : 0.0 + paddingBottom)),
               duration: const Duration(milliseconds: 250),
               curve: Curves.ease,
               child: _showTools
                   ? _buildTools()
                   : (_showEmoji ? _buildEmoji() : null),
-            )
+            ),
           ],
         ),
       ),
@@ -242,7 +259,7 @@ class ChatInputState extends State<ChatInput> {
   void _close() {
     if (mounted) {
       _focusNode.unfocus();
-      _keyboardHeight = 0.0;
+      _keyboardHeight = 0.0 + paddingBottom;
       setState(() {});
     }
   }

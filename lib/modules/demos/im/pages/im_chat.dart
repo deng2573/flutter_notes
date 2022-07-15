@@ -10,12 +10,21 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChatInput(
       child: ListView.builder(
-        itemCount: 500,
+        itemCount: 10,
         itemBuilder: (context, index) {
           return Card(
             color: ColorExtension.random,
-            child: const SizedBox(
+            child: SizedBox(
               height: 100,
+              child: Text(
+                '$index',
+                textAlign: TextAlign.left,
+                style: const TextStyle(
+                  fontSize: 20,
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
           );
         },
